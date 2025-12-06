@@ -2,6 +2,7 @@ package com.henninghall.date_picker;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
 
@@ -28,8 +29,8 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
     }
 
     @Override
-    public void openPicker(ReadableMap props){
-        module.openPicker(props);
+    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
+        module.openPicker(props, onConfirm, onCancel);
     }
 
     @Override

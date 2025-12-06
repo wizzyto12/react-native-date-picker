@@ -76,12 +76,7 @@ export const useModal = ({ props, id }) => {
   useEffect(() => {
     if (shouldOpenModal(props, previousProps)) {
       closing.current = false
-      const params = Platform.select({
-        android: [props],
-        ios: [props, onConfirm, onCancel],
-      })
-      if (!params) throw Error('Unsupported platform')
-      NativeModule.openPicker(...params)
+      NativeModule.openPicker(props, onConfirm, onCancel)
     }
   }, [onCancel, onConfirm, previousProps, props])
 

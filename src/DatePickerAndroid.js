@@ -67,9 +67,10 @@ export const DatePickerAndroid = React.memo((props) => {
     onStateChange: onSpinnerStateChanged,
   }
 
-  useModal({ props: modifiedProps, id: thisId })
-
-  if (props.modal) return null
+  if (props.modal) {
+    useModal({ props: modifiedProps, id: thisId })
+    return null
+  }
 
   return <NativeComponent {...modifiedProps} />
 })

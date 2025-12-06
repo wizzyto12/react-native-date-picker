@@ -28,9 +28,10 @@ export const DatePickerIOS = (props) => {
     theme: props.theme ? props.theme : 'auto',
   }
 
-  useModal({ props: modifiedProps, id: undefined })
-
-  if (props.modal) return null
+  if (props.modal) {
+    useModal({ props: modifiedProps, id: undefined })
+    return null
+  }
 
   return (
     <NativeComponent

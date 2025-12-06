@@ -30,23 +30,29 @@ public class DatePickerModuleImpl {
         ApplicationStarter.initialize(context, false); // false = no need to prefetch on time data background tread
     }
 
-    public void openPicker(ReadableMap props){
+    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
         final PickerView picker = createPicker(props);
-        Callback onConfirm = new Callback() {
+        Callback onConfirmCallback = new Callback() {
             @Override
             public void invoke(Object... objects) {
                 Emitter.onConfirm(picker.getDate(), picker.getPickerId());
+                if (onConfirm != null) {
+                    onConfirm.invoke(picker.getDate());
+                }
             }
         };
 
-        Callback onCancel = new Callback() {
+        Callback onCancelCallback = new Callback() {
             @Override
             public void invoke(Object... objects) {
                 Emitter.onCancel(picker.getPickerId());
+                if (onCancel != null) {
+                    onCancel.invoke();
+                }
             }
         };
 
-        dialog = createDialog(props, picker, onConfirm, onCancel);
+        dialog = createDialog(props, picker, onConfirmCallback, onCancelCallback);
         dialog.show();
     }
 
